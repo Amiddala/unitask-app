@@ -3,6 +3,7 @@ import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import LoginForm from './components/LoginForm/LoginForm';
 import DashboardScreen from './pages/DashboardScreen/DashboardScreen';
+import TasksScreen from './pages/TasksScreen/TasksScreen';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
@@ -21,6 +22,14 @@ function App() {
         }
       />
       {/* US-05, US-07, US-09 agregarán /tareas, /examenes, /grupos */}
+      <Route
+        path="/tareas"
+        element={
+          <ProtectedRoute>
+            <TasksScreen />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }
