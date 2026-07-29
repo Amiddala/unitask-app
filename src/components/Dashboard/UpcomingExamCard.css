@@ -1,0 +1,58 @@
+.exam-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-radius: var(--radius-md);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-soft);
+}
+
+.exam-card--alta {
+  background: #FEECEB;
+}
+
+.exam-card--media {
+  background: #FEF6E7;
+}
+
+.exam-card__icon {
+  display: flex;
+}
+
+.exam-card--alta .exam-card__icon { color: var(--color-exam); }
+.exam-card--media .exam-card__icon { color: var(--color-warning); }
+
+.exam-card__main {
+  flex: 1;
+}
+
+.exam-card__title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 2px;
+}
+
+.exam-card__subject {
+  font-size: 12px;
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+.exam-card__when {
+  text-align: right;
+}
+
+.exam-card__countdown {
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.exam-card--alta .exam-card__countdown { color: var(--color-exam); }
+.exam-card--media .exam-card__countdown { color: var(--color-warning); }
+
+.exam-card__date {
+  display: block;
+  font-size: 11px;
+  color: var(--color-ink-muted);
+}
