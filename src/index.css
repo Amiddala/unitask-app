@@ -1,20 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap");
 
 :root {
-  --color-bg: #F3F5F1;
-  --color-surface: #FFFFFF;
-  --color-ink: #171B26;
-  --color-ink-muted: #6B7280;
+  --color-success: #16a34a;
+  --color-border: #e1e4de;
+  --color-bg: #f3f5f1;
+  --color-surface: #ffffff;
+  --color-ink: #171b26;
+  --color-ink-muted: #6b7280;
 
-  --color-primary: #3D4FE0;
-  --color-primary-dark: #2E3AB0;
+  --color-primary: #3d4fe0;
+  --color-primary-dark: #2e3ab0;
 
-  --color-exam: #FF5B54;
-  --color-personal: #3D8BFF;
-  --color-group: #9B5DE5;
+  --color-exam: #ff5b54;
+  --color-personal: #3d8bff;
+  --color-group: #9b5de5;
 
-  --font-display: 'Fraunces', serif;
-  --font-body: 'Inter', system-ui, sans-serif;
+  --font-display: "Fraunces", serif;
+  --font-body: "Inter", system-ui, sans-serif;
 
   --radius-lg: 20px;
   --radius-md: 12px;
