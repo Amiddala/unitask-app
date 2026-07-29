@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router-dom';
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
 import RegisterForm from './components/RegisterForm/RegisterForm';
+import LoginForm from './components/LoginForm/LoginForm';
 import './App.css';
 
 function App() {
@@ -8,7 +9,8 @@ function App() {
     <Routes>
       <Route path="/" element={<WelcomeScreen />} />
       <Route path="/registro" element={<RegisterForm />} />
-      {/* US-03 agregará /login */}
+      <Route path="/login" element={<LoginForm />} />
+      {/* US-04 agregará /dashboard */}
     </Routes>
   );
 }
