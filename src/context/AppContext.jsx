@@ -8,6 +8,17 @@ const addDays = (n) => {
   return d;
 };
 
+function getNameInitials(nombreCompleto) {
+  if (!nombreCompleto) return '??';
+  return nombreCompleto
+    .split(' ')
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+}
+
 const initialTasks = [
   {
     id: 't1',
@@ -58,6 +69,32 @@ const initialExams = [
   },
 ];
 
+const initialGroups = [
+  {
+    id: 'g1',
+    nombre: 'Equipo Alfa - Prototipo',
+    materia: 'Interacción Humano Computador',
+    participantes: ['MM', 'CM', 'JP', 'AN', 'TL'],
+    tieneReunionActiva: false
+  },
+  {
+    id: 'g2',
+    nombre: 'Grupo 4: Desarrollo Backend',
+    materia: 'Taller de Ingeniería de Software',
+    participantes: ['AR', 'CM'],
+    tieneReunionActiva: true
+  }
+];
+
+const initialInvitations = [
+  {
+    id: 'i1',
+    nombre: 'Los Algorítmicos',
+    materia: 'Estructura de Datos',
+    remitente: 'Carlos Mendoza'
+  }
+];
+
 function buildCalendarEvents(tasks, exams) {
   const map = {};
   const addEvent = (dateStr, type) => {
@@ -72,7 +109,16 @@ function buildCalendarEvents(tasks, exams) {
 
 function readStoredUser() {
   try {
-    return JSON.parse(localStorage.getItem('unitask_user'));
+    const raw = JSON.parse(localStorage.getItem('unitask_user'));
+    if (!raw) return null;
+
+    const normalized = {
+      ...raw,
+      avatarIniciales: raw.avatarIniciales || getNameInitials(raw.nombreCompleto),
+      avatarUrl: raw.avatarUrl || '',
+      carrera: raw.carrera || 'Ingeniería de Software',
+    };
+    return normalized;
   } catch {
     return null;
   }
@@ -82,7 +128,8 @@ const initialState = {
   user: readStoredUser(),
   tasks: initialTasks,
   exams: initialExams,
-  groups: [],
+  groups: initialGroups,
+  invitation: initialInvitations,
 };
 
 function reducer(state, action) {
@@ -100,6 +147,26 @@ function reducer(state, action) {
           t.id === action.payload.id ? { ...t, estado: action.payload.estado } : t,
         ),
       };
+    // CASO PARA LA HU-6 Y PODER AGREGAR SUBTAREAS
+    case 'UPDATE_TASK':
+      return {
+        ...state,
+        tasks: state.tasks.map((t) =>
+          t.id === action.payload.id ? action.payload : t
+        ),
+      };
+    // CASO PARA LA HU-8
+    case 'ACCEPT_INVITATION':
+      return {
+        ...state,
+        invitations: state.invitations.filter(inv => inv.id !== action.payload.id),
+        groups: [...state.groups, action.payload.newGroup]
+      };
+    case 'DECLINE_INVITATION':
+      return {
+        ...state,
+        invitations: state.invitations.filter(inv => inv.id !== action.payload)
+      };
     case 'LOGOUT':
       return { ...state, user: null };
     default:
@@ -112,7 +179,13 @@ export function AppProvider({ children }) {
 
   useEffect(() => {
     if (state.user) {
-      localStorage.setItem('unitask_user', JSON.stringify(state.user));
+      const storedUser = {
+        ...state.user,
+        avatarIniciales: state.user.avatarIniciales || getNameInitials(state.user.nombreCompleto),
+      };
+      localStorage.setItem('unitask_user', JSON.stringify(storedUser));
+    } else {
+      localStorage.removeItem('unitask_user');
     }
   }, [state.user]);
 

@@ -5,6 +5,14 @@ import LoginForm from './components/LoginForm/LoginForm';
 import DashboardScreen from './pages/DashboardScreen/DashboardScreen';
 import TasksScreen from './pages/TasksScreen/TasksScreen';
 import GroupDetailScreen from './screens/GroupDetailScreen'; // Importacion US-09
+import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
+import SettingsScreen from './pages/SettingsScreen/SettingsScreen';
+import EditAccountScreen from './pages/EditAccountScreen/EditAccountScreen';
+import TaskDetailScreen from './pages/TaskDetailScreen/TaskDetailScreen';
+import ExamsScreen from './pages/ExamsScreen/ExamsScreen';
+import GroupsScreen from './pages/GroupsScreen/GroupsScreen';
+import HelpScreen from './pages/HelpScreen/HelpScreen';
+import NotImplementedScreen from './pages/NotImplementedScreen/NotImplementedScreen';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
@@ -14,6 +22,7 @@ function App() {
       <Route path="/" element={<WelcomeScreen />} />
       <Route path="/registro" element={<RegisterForm />} />
       <Route path="/login" element={<LoginForm />} />
+      
       <Route
         path="/dashboard"
         element={
@@ -22,7 +31,34 @@ function App() {
           </ProtectedRoute>
         }
       />
-      {/* US-05, US-07, US-09 agregaran /tareas, /examenes, /grupos */}
+      
+      <Route
+        path="/perfil"
+        element={
+          <ProtectedRoute>
+            <ProfileScreen />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route
+        path="/perfil/configuracion"
+        element={
+          <ProtectedRoute>
+            <SettingsScreen />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route
+        path="/perfil/editar-cuenta"
+        element={
+          <ProtectedRoute>
+            <EditAccountScreen />
+          </ProtectedRoute>
+        }
+      />
+      
       <Route
         path="/tareas"
         element={
@@ -31,12 +67,51 @@ function App() {
           </ProtectedRoute>
         }
       />
+
+      <Route
+        path="/tareas/:id"
+        element={
+          <ProtectedRoute>
+            <TaskDetailScreen />
+          </ProtectedRoute>
+        }
+      />
+
       {/* Implementacion US-09: Vista Detallada de Grupo */}
       <Route
         path="/grupos/:id"
         element={
           <ProtectedRoute>
             <GroupDetailScreen />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/examenes"
+        element={
+          <ProtectedRoute>
+            <ExamsScreen />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/grupos"
+        element={
+          <ProtectedRoute>
+            <GroupsScreen />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route path="/ayuda" element={<HelpScreen />} />
+      
+      <Route
+        path="/en-desarrollo"
+        element={
+          <ProtectedRoute>
+            <NotImplementedScreen />
           </ProtectedRoute>
         }
       />

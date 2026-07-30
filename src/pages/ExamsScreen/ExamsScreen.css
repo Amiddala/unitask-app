@@ -1,0 +1,163 @@
+.exams-screen-container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 24px 20px 100px 20px;
+    padding-bottom: 100px;
+    background-color: var(--color-bg);
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header de la sección */
+.exams-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.exams-header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0;
+}
+
+.user-avatar-badge {
+    width: 40px;
+    height: 40px;
+    background-color: #e5e8e1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #555e6b;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.user-avatar-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Switcher de Pestañas (Tabs) */
+.exams-tabs-container {
+    background-color: #f1f3f0;
+    border-radius: 12px;
+    padding: 4px;
+    display: flex;
+    gap: 4px;
+    margin-bottom: 24px;
+}
+
+.exam-tab-button {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-ink-muted);
+    border-radius: 9px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.exam-tab-button.active {
+    background-color: #ffffff;
+    color: var(--color-ink);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Agrupadores Mensuales */
+.month-group-container {
+    margin-bottom: 24px;
+}
+
+.month-group-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin: 0 0 16px 0;
+}
+
+/* Estructura Base de la Tarjeta de Examen */
+.exam-card {
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-sizing: border-box;
+}
+
+/* Variación: Próximos (Paleta Roja Figma) */
+.exam-card.upcoming {
+    background-color: #fff5f5;
+    border: 1px solid #ffe3e3;
+    border-left: 5px solid #ef4444;
+}
+
+/* Variación: Historial (Paleta Azul Sugerida) */
+.exam-card.history {
+    background-color: #f0f4ff;
+    border: 1px solid #deebff;
+    border-left: 5px solid var(--color-primary);
+}
+
+.exam-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin: 0;
+}
+
+.exam-card-type {
+    font-size: 13px;
+    color: var(--color-ink-muted);
+    margin-bottom: 4px;
+    text-transform: capitalize; /* Hace que se vea pulcro */
+}
+
+.exam-card-details-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin-top: 4px;
+}
+
+.exam-detail-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 500;
+}
+
+/* Colores condicionales según pestaña para los iconos y textos internos */
+.exam-card.upcoming .exam-detail-item {
+    color: #ef4444;
+}
+
+.exam-card.history .exam-detail-item {
+    color: var(--color-primary);
+}
+
+.exam-detail-location {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--color-ink-muted);
+}
+
+.exams-fab-button:active {
+    transform: scale(0.95);
+}

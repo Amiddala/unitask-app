@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
+import { useApp } from '../../context/AppContext';
 import InputField from '../shared/InputField';
 import PasswordInput from '../shared/PasswordInput';
 import SocialAuthButtons from '../shared/SocialAuthButtons';
@@ -8,6 +9,7 @@ import './LoginForm.css';
 
 function LoginForm() {
   const navigate = useNavigate();
+  const { dispatch } = useApp();
 
   const [credentials, setCredentials] = useState({ usuario: '', password: '' });
   const [loginError, setLoginError] = useState(null);
@@ -36,6 +38,7 @@ function LoginForm() {
         credentials.password === storedUser.password;
 
       if (matches) {
+        dispatch({ type: 'SET_USER', payload: storedUser });
         localStorage.setItem('unitask_session', 'active');
         setIsLoading(false);
         navigate('/dashboard');

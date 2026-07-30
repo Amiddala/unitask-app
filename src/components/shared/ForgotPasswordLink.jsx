@@ -1,11 +1,12 @@
+import { useNavigate } from 'react-router-dom';
 import './ForgotPasswordLink.css';
 
 function ForgotPasswordLink() {
+  const navigate = useNavigate();
+
   const handleClick = (e) => {
     e.preventDefault();
-    // Mock: sin flujo de recuperación real todavía
-    console.log('Recuperación de contraseña: flujo no implementado (mock)');
-    alert('La recuperación de contraseña estará disponible próximamente.');
+    navigate('/ayuda');
   };
 
   return (
