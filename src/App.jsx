@@ -4,6 +4,7 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import LoginForm from './components/LoginForm/LoginForm';
 import DashboardScreen from './pages/DashboardScreen/DashboardScreen';
 import TasksScreen from './pages/TasksScreen/TasksScreen';
+import GroupDetailScreen from './screens/GroupDetailScreen'; // Importacion US-09
 import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
 import SettingsScreen from './pages/SettingsScreen/SettingsScreen';
 import EditAccountScreen from './pages/EditAccountScreen/EditAccountScreen';
@@ -21,6 +22,7 @@ function App() {
       <Route path="/" element={<WelcomeScreen />} />
       <Route path="/registro" element={<RegisterForm />} />
       <Route path="/login" element={<LoginForm />} />
+      
       <Route
         path="/dashboard"
         element={
@@ -29,6 +31,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+      
       <Route
         path="/perfil"
         element={
@@ -37,6 +40,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+      
       <Route
         path="/perfil/configuracion"
         element={
@@ -45,6 +49,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+      
       <Route
         path="/perfil/editar-cuenta"
         element={
@@ -53,7 +58,7 @@ function App() {
           </ProtectedRoute>
         }
       />
-      {/* US-05, US-07, US-09 agregarán /tareas, /examenes, /grupos */}
+      
       <Route
         path="/tareas"
         element={
@@ -68,6 +73,16 @@ function App() {
         element={
           <ProtectedRoute>
             <TaskDetailScreen />
+          </ProtectedRoute>
+        }
+      />
+
+      {/* Implementacion US-09: Vista Detallada de Grupo */}
+      <Route
+        path="/grupos/:id"
+        element={
+          <ProtectedRoute>
+            <GroupDetailScreen />
           </ProtectedRoute>
         }
       />
@@ -89,7 +104,9 @@ function App() {
           </ProtectedRoute>
         }
       />
+      
       <Route path="/ayuda" element={<HelpScreen />} />
+      
       <Route
         path="/en-desarrollo"
         element={
