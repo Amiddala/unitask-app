@@ -8,6 +8,38 @@ import FloatingActionButton from '../../components/shared/FloatingActionButton';
 import { useApp } from '../../context/AppContext';
 import './DashboardScreen.css';
 
+const SETTINGS_KEY = 'unitask_settings';
+const DISMISS_KEY = 'unitask_alert_dismissed';
+
+function readStoredSettings() {
+  try {
+    const raw = localStorage.getItem(SETTINGS_KEY);
+    if (!raw) return { notificaciones: true };
+    return JSON.parse(raw);
+  } catch {
+    return { notificaciones: true };
+  }
+}
+
+function readDismissedActivities() {
+  try {
+    const raw = localStorage.getItem(DISMISS_KEY);
+    if (!raw) return {};
+    return JSON.parse(raw);
+  } catch {
+    return {};
+  }
+}
+
+function writeDismissedActivity(id) {
+  const current = readDismissedActivities();
+  const next = {
+    ...current,
+    [id]: Date.now() + 15 * 60 * 1000,
+  };
+  localStorage.setItem(DISMISS_KEY, JSON.stringify(next));
+}
+
 function sortByDate(items) {
   return [...items].sort((a, b) => new Date(a.fechaLimite) - new Date(b.fechaLimite));
 }
@@ -16,6 +48,7 @@ function DashboardScreen() {
   const { tasks, exams, calendarEvents } = useApp();
   const [selectedDay, setSelectedDay] = useState(new Date());
   const [visibleActivities, setVisibleActivities] = useState([]);
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
 
   const upcomingTasks = sortByDate(tasks).slice(0, 4);
   const upcomingExams = sortByDate(exams).slice(0, 3);
@@ -52,10 +85,24 @@ function DashboardScreen() {
   }, [tasks, exams]);
 
   useEffect(() => {
-    setVisibleActivities(criticalActivities);
+    const settings = readStoredSettings();
+    setNotificationsEnabled(Boolean(settings.notificaciones));
+  }, []);
+
+  useEffect(() => {
+    const stored = readDismissedActivities();
+    const now = Date.now();
+
+    const visible = criticalActivities.filter((activity) => {
+      const expiry = stored[activity.id];
+      return !expiry || expiry <= now;
+    });
+
+    setVisibleActivities(visible);
   }, [criticalActivities]);
 
   const dismissActivity = (id) => {
+    writeDismissedActivity(id);
     setVisibleActivities((currentActivities) =>
       currentActivities.filter((activity) => activity.id !== id),
     );
@@ -63,7 +110,7 @@ function DashboardScreen() {
 
   return (
     <DashboardLayout>
-      {visibleActivities.length > 0 && (
+      {notificationsEnabled && visibleActivities.length > 0 && (
         <ActivityAlertBanner
           criticalActivities={visibleActivities}
           onDismissItem={dismissActivity}
