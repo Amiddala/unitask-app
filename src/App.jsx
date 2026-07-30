@@ -10,6 +10,8 @@ import EditAccountScreen from './pages/EditAccountScreen/EditAccountScreen';
 import TaskDetailScreen from './pages/TaskDetailScreen/TaskDetailScreen';
 import ExamsScreen from './pages/ExamsScreen/ExamsScreen';
 import GroupsScreen from './pages/GroupsScreen/GroupsScreen';
+import HelpScreen from './pages/HelpScreen/HelpScreen';
+import NotImplementedScreen from './pages/NotImplementedScreen/NotImplementedScreen';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
@@ -87,7 +89,15 @@ function App() {
           </ProtectedRoute>
         }
       />
-      
+      <Route path="/ayuda" element={<HelpScreen />} />
+      <Route
+        path="/en-desarrollo"
+        element={
+          <ProtectedRoute>
+            <NotImplementedScreen />
+          </ProtectedRoute>
+        }
+      />
     </Routes>
   );
 }

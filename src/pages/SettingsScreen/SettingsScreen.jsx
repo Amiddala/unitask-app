@@ -71,7 +71,11 @@ function SettingsScreen() {
             <span>Editar cuenta</span>
             <span className="settings-screen__menu-arrow">›</span>
           </button>
-          <button type="button" className="settings-screen__menu-row">
+          <button
+            type="button"
+            className="settings-screen__menu-row"
+            onClick={() => navigate('/en-desarrollo')}
+          >
             <span>Seguridad y contraseña</span>
             <span className="settings-screen__menu-arrow">›</span>
           </button>
@@ -95,11 +99,19 @@ function SettingsScreen() {
 
         <div className="settings-screen__section settings-screen__menu-section">
           <h2>Soporte</h2>
-          <button type="button" className="settings-screen__menu-row">
+          <button
+            type="button"
+            className="settings-screen__menu-row"
+            onClick={() => navigate('/ayuda')}
+          >
             <span>Centro de ayuda</span>
             <span className="settings-screen__menu-arrow">›</span>
           </button>
-          <button type="button" className="settings-screen__menu-row">
+          <button
+            type="button"
+            className="settings-screen__menu-row"
+            onClick={() => navigate('/en-desarrollo')}
+          >
             <span>Términos y privacidad</span>
             <span className="settings-screen__menu-arrow">›</span>
           </button>

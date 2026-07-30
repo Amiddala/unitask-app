@@ -95,7 +95,7 @@ export default function TaskDetailScreen() {
             ←
             </button>
             <h2 className="detail-nav-title">Detalle de Tarea</h2>
-            <button className="edit-button" onClick={() => alert('Modo edición en desarrollo')}>
+            <button className="edit-button" onClick={() => navigate('/en-desarrollo')}>
             📝
             </button>
         </div>
