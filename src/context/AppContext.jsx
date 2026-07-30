@@ -8,6 +8,17 @@ const addDays = (n) => {
   return d;
 };
 
+function getNameInitials(nombreCompleto) {
+  if (!nombreCompleto) return '??';
+  return nombreCompleto
+    .split(' ')
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+}
+
 const initialTasks = [
   {
     id: 't1',
@@ -98,7 +109,16 @@ function buildCalendarEvents(tasks, exams) {
 
 function readStoredUser() {
   try {
-    return JSON.parse(localStorage.getItem('unitask_user'));
+    const raw = JSON.parse(localStorage.getItem('unitask_user'));
+    if (!raw) return null;
+
+    const normalized = {
+      ...raw,
+      avatarIniciales: raw.avatarIniciales || getNameInitials(raw.nombreCompleto),
+      avatarUrl: raw.avatarUrl || '',
+      carrera: raw.carrera || 'Ingeniería de Software',
+    };
+    return normalized;
   } catch {
     return null;
   }
@@ -159,7 +179,13 @@ export function AppProvider({ children }) {
 
   useEffect(() => {
     if (state.user) {
-      localStorage.setItem('unitask_user', JSON.stringify(state.user));
+      const storedUser = {
+        ...state.user,
+        avatarIniciales: state.user.avatarIniciales || getNameInitials(state.user.nombreCompleto),
+      };
+      localStorage.setItem('unitask_user', JSON.stringify(storedUser));
+    } else {
+      localStorage.removeItem('unitask_user');
     }
   }, [state.user]);
 

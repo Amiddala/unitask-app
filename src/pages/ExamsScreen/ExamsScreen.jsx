@@ -1,12 +1,16 @@
 import React, { useState, useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
 import BottomNavBar from '../../components/shared/BottomNavBar';
 import FloatingActionButton from '../../components/shared/FloatingActionButton';
+import ProfileAvatarButton from '../../components/Profile/ProfileAvatarButton';
 import './ExamsScreen.css';
 
 export default function ExamsScreen() {
-    const { exams } = useApp();
+    const { exams, user } = useApp();
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('proximos');
+    const avatarInitials = user?.avatarIniciales || '??';
 
     // Helper para convertir la fecha ISO al nombre del mes en Español
     const getMonthName = (dateString) => {
@@ -73,7 +77,12 @@ export default function ExamsScreen() {
         {/* Header Superior */}
         <div className="exams-header">
             <h1>Exámenes</h1>
-            <div className="user-avatar-badge">CM</div>
+            <ProfileAvatarButton
+              initials={avatarInitials}
+              avatarUrl={user?.avatarUrl}
+              onClick={() => navigate('/perfil')}
+              ariaLabel="Ver perfil"
+            />
         </div>
 
         {/* Selector de Pestañas Interactivo */}

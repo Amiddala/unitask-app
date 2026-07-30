@@ -1,15 +1,18 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
-import Badge from '../../components/shared/Badge'; // Lo usamos si renderiza igual, si no, lo estilizamos directo
 import BottomNavBar from '../../components/shared/BottomNavBar';
 import FloatingActionButton from '../../components/shared/FloatingActionButton';
+import ProfileAvatarButton from '../../components/Profile/ProfileAvatarButton';
 import './TasksScreen.css';
 
 export default function TasksScreen() {
-    const { tasks } = useApp();
+    const { tasks, user } = useApp();
     const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('pendiente');
+    const avatarInitials = user?.avatarIniciales || '??';
+    const completedCount = tasks.filter((task) => task.estado === 'completadas').length;
+    const pendingCount = tasks.filter((task) => task.estado === 'pendiente').length;
 
     const filteredTasks = useMemo(() => {
         return tasks.filter(task => task.estado === activeTab);
@@ -39,8 +42,27 @@ export default function TasksScreen() {
     return (
         <div className="tasks-screen-container">
         <div className="tasks-header">
-            <h1 className="tasks-title">Tareas</h1>
-            <div className="user-avatar">CM</div>
+            <div>
+              <h1 className="tasks-title">Tareas</h1>
+              <p className="tasks-subtitle">Resumen de tu actividad académica</p>
+            </div>
+            <ProfileAvatarButton
+              initials={avatarInitials}
+              avatarUrl={user?.avatarUrl}
+              onClick={() => navigate('/perfil')}
+              ariaLabel="Ver perfil"
+            />
+        </div>
+
+        <div className="tasks-summary">
+            <div className="tasks-summary__item">
+              <span className="tasks-summary__label">Realizadas</span>
+              <strong>{completedCount}</strong>
+            </div>
+            <div className="tasks-summary__item">
+              <span className="tasks-summary__label">Pendientes</span>
+              <strong>{pendingCount}</strong>
+            </div>
         </div>
         
         {/* Selector de pestañas */}

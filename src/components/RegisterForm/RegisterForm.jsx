@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import { useApp } from '../../context/AppContext';
 import InputField from "../shared/InputField";
 import PasswordInput from "../shared/PasswordInput";
 import SocialAuthButtons from "../shared/SocialAuthButtons";
@@ -25,6 +26,7 @@ function CheckIcon() {
 
 function RegisterForm() {
   const navigate = useNavigate();
+  const { dispatch } = useApp();
 
   const [formData, setFormData] = useState({
     nombreCompleto: "",
@@ -94,6 +96,7 @@ function RegisterForm() {
 
     localStorage.setItem("unitask_user", JSON.stringify(newUser));
     localStorage.setItem("unitask_session", "active");
+    dispatch({ type: 'SET_USER', payload: newUser });
 
     navigate("/dashboard");
   };

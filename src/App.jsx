@@ -4,6 +4,9 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import LoginForm from './components/LoginForm/LoginForm';
 import DashboardScreen from './pages/DashboardScreen/DashboardScreen';
 import TasksScreen from './pages/TasksScreen/TasksScreen';
+import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
+import SettingsScreen from './pages/SettingsScreen/SettingsScreen';
+import EditAccountScreen from './pages/EditAccountScreen/EditAccountScreen';
 import TaskDetailScreen from './pages/TaskDetailScreen/TaskDetailScreen';
 import ExamsScreen from './pages/ExamsScreen/ExamsScreen';
 import GroupsScreen from './pages/GroupsScreen/GroupsScreen';
@@ -21,6 +24,30 @@ function App() {
         element={
           <ProtectedRoute>
             <DashboardScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/perfil"
+        element={
+          <ProtectedRoute>
+            <ProfileScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/perfil/configuracion"
+        element={
+          <ProtectedRoute>
+            <SettingsScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/perfil/editar-cuenta"
+        element={
+          <ProtectedRoute>
+            <EditAccountScreen />
           </ProtectedRoute>
         }
       />
