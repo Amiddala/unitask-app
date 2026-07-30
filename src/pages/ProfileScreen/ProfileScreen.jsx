@@ -5,15 +5,26 @@ import ProfileInfoRow from '../../components/Profile/ProfileInfoRow';
 import NavigateToSettingsButton from '../../components/Profile/NavigateToSettingsButton';
 import './ProfileScreen.css';
 
+function getNameInitials(nombreCompleto) {
+  if (!nombreCompleto) return '??';
+  return nombreCompleto
+    .split(' ')
+    .filter(Boolean)
+    .map((part) => part[0])
+    .join('')
+    .slice(0, 2)
+    .toUpperCase();
+}
+
 function ProfileScreen() {
   const { user } = useApp();
-  const initials = user?.avatarIniciales || '??';
+  const initials = user?.avatarIniciales || getNameInitials(user?.nombreCompleto);
 
   return (
     <DashboardLayout>
       <section className="profile-screen__card">
         <div className="profile-screen__header">
-          <UserAvatarLarge initials={initials} />
+          <UserAvatarLarge initials={initials} avatarUrl={user?.avatarUrl} />
           <div className="profile-screen__user-meta">
             <p className="profile-screen__name">{user?.nombreCompleto || 'Estudiante'}</p>
             <p className="profile-screen__username">@{user?.username || 'usuario'}</p>

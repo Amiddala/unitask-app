@@ -28,7 +28,15 @@ function DashboardLayout({ children }) {
           onClick={() => navigate('/perfil')}
           aria-label="Ver perfil"
         >
-          {initials}
+          {user?.avatarUrl ? (
+            <img
+              src={user.avatarUrl}
+              alt="Avatar del usuario"
+              className="dashboard-layout__avatar-image"
+            />
+          ) : (
+            initials
+          )}
         </button>
       </header>
 

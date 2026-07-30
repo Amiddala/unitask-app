@@ -7,6 +7,13 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
+  overflow: hidden;
+}
+
+.user-avatar-large--photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .profile-info-row {
@@ -75,18 +82,26 @@
 }
 
 .setting-toggle-row__switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   position: relative;
-  width: 44px;
-  height: 24px;
+  width: 46px;
+  height: 26px;
 }
 
 .setting-toggle-row__switch input {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
   opacity: 0;
-  width: 0;
-  height: 0;
+  cursor: pointer;
 }
 
 .setting-toggle-row__track {
+  position: relative;
   width: 100%;
   height: 100%;
   background: #e5e7eb;
@@ -104,6 +119,33 @@
   background: #fff;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
   transition: transform 0.2s ease;
+}
+
+.setting-toggle-row__status {
+  font-size: 13px;
+  color: var(--color-ink-muted);
+}
+
+.setting-toggle-row__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.editable-info-row__button,
+.logout-button {
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.editable-info-row__button:hover,
+.logout-button:hover {
+  transform: translateY(-1px);
 }
 
 .setting-toggle-row__switch input:checked + .setting-toggle-row__track {
