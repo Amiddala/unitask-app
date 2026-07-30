@@ -6,6 +6,8 @@ import DashboardScreen from './pages/DashboardScreen/DashboardScreen';
 import TasksScreen from './pages/TasksScreen/TasksScreen';
 import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
 import SettingsScreen from './pages/SettingsScreen/SettingsScreen';
+import TaskDetailScreen from './pages/TaskDetailScreen/TaskDetailScreen';
+import ExamsScreen from './pages/ExamsScreen/ExamsScreen';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
@@ -48,6 +50,25 @@ function App() {
           </ProtectedRoute>
         }
       />
+
+      <Route
+        path="/tareas/:id"
+        element={
+          <ProtectedRoute>
+            <TaskDetailScreen />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/examenes"
+        element={
+          <ProtectedRoute>
+            <ExamsScreen />
+          </ProtectedRoute>
+        }
+      />
+      
     </Routes>
   );
 }
