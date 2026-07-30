@@ -1,0 +1,222 @@
+.groups-screen-container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 24px 20px 100px 20px;
+    background-color: var(--color-bg);
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header de la sección */
+.groups-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.groups-header h1 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-ink);
+    margin: 0;
+}
+
+.user-avatar-badge {
+    width: 40px;
+    height: 40px;
+    background-color: #e5e8e1;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #555e6b;
+    font-size: 14px;
+}
+
+/* Selector de Pestañas (Tabs) */
+.groups-tabs-container {
+    background-color: #f1f3f0;
+    border-radius: 12px;
+    padding: 4px;
+    display: flex;
+    gap: 4px;
+    margin-bottom: 24px;
+}
+
+.group-tab-button {
+    flex: 1;
+    background: none;
+    border: none;
+    padding: 10px 0;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--color-ink-muted);
+    border-radius: 9px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.group-tab-button.active {
+    background-color: #ffffff;
+    color: var(--color-ink);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Punto de notificación rojo del Tab */
+.tab-notification-dot {
+    width: 6px;
+    height: 6px;
+    background-color: #ef4444;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Título de la sección interna */
+.groups-section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin: 0 0 16px 0;
+}
+
+/* Tarjeta de Grupo */
+.group-card {
+    background-color: #ffffff;
+    border: 1px solid #eef0ec;
+    border-left: 5px solid #8b5cf6; /* Morado representativo de grupos */
+    border-radius: var(--radius-md);
+    padding: 16px;
+    margin-bottom: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: transform 0.15s ease;
+}
+
+.group-card:active {
+    transform: scale(0.99);
+}
+
+.group-card-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--color-ink);
+    margin: 0;
+}
+
+.group-card-subject {
+    font-size: 14px;
+    color: var(--color-ink-muted);
+    margin-bottom: 12px;
+}
+
+/* Fila inferior con el stack y las alertas/acciones */
+.group-card-footer-row {
+    border-top: 1px solid #f8faf7;
+    padding-top: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Listado de Avatares Apilados (Avatar Stack) */
+.avatar-stack-container {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-stack-member {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    border: 2px solid #ffffff;
+    margin-left: -6px;
+}
+
+.avatar-stack-member:first-child {
+    margin-left: 0;
+}
+
+/* Colores pasteles aleatorios/estáticos para el Stack */
+.avatar-stack-member.color-1 { background-color: #dbeafe; color: #1e40af; }
+.avatar-stack-member.color-2 { background-color: #f3e8ff; color: #6b21a8; }
+.avatar-stack-member.color-3 { background-color: #d1fae5; color: #065f46; }
+.avatar-stack-member.color-4 { background-color: #fef3c7; color: #92400e; }
+
+.avatar-stack-surplus {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background-color: #f1f3f0;
+    color: var(--color-ink-muted);
+    font-size: 11px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    margin-left: -6px;
+}
+
+/* Indicador de Reunión Activa */
+.active-meeting-badge {
+    background-color: #fff5f5;
+    border: 1px solid #ffe3e3;
+    color: #ef4444;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* Icono navegación flecha derecha */
+.group-arrow-action {
+    color: #8b5cf6;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Estilo para las tarjetas en pestaña invitaciones */
+.invitation-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.invitation-btn {
+    border: none;
+    padding: 6px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.invitation-btn.accept {
+    background-color: var(--color-primary);
+    color: white;
+}
+
+.invitation-btn.decline {
+    background-color: #f1f3f0;
+    color: var(--color-ink-muted);
+}

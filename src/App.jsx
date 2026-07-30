@@ -6,6 +6,7 @@ import DashboardScreen from './pages/DashboardScreen/DashboardScreen';
 import TasksScreen from './pages/TasksScreen/TasksScreen';
 import TaskDetailScreen from './pages/TaskDetailScreen/TaskDetailScreen';
 import ExamsScreen from './pages/ExamsScreen/ExamsScreen';
+import GroupsScreen from './pages/GroupsScreen/GroupsScreen';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
@@ -47,6 +48,15 @@ function App() {
         element={
           <ProtectedRoute>
             <ExamsScreen />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/grupos"
+        element={
+          <ProtectedRoute>
+            <GroupsScreen />
           </ProtectedRoute>
         }
       />
