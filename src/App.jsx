@@ -6,6 +6,7 @@ import DashboardScreen from './pages/DashboardScreen/DashboardScreen';
 import TasksScreen from './pages/TasksScreen/TasksScreen';
 import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
 import SettingsScreen from './pages/SettingsScreen/SettingsScreen';
+import EditAccountScreen from './pages/EditAccountScreen/EditAccountScreen';
 import TaskDetailScreen from './pages/TaskDetailScreen/TaskDetailScreen';
 import ExamsScreen from './pages/ExamsScreen/ExamsScreen';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
@@ -38,6 +39,14 @@ function App() {
         element={
           <ProtectedRoute>
             <SettingsScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/perfil/editar-cuenta"
+        element={
+          <ProtectedRoute>
+            <EditAccountScreen />
           </ProtectedRoute>
         }
       />

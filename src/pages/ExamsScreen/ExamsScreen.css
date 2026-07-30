@@ -38,6 +38,13 @@
     font-weight: 600;
     color: #555e6b;
     font-size: 14px;
+    overflow: hidden;
+}
+
+.user-avatar-badge img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 /* Switcher de Pestañas (Tabs) */

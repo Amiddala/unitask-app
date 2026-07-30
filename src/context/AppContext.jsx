@@ -90,6 +90,7 @@ function readStoredUser() {
       ...raw,
       avatarIniciales: raw.avatarIniciales || getNameInitials(raw.nombreCompleto),
       avatarUrl: raw.avatarUrl || '',
+      carrera: raw.carrera || 'Ingeniería de Software',
     };
     return normalized;
   } catch {

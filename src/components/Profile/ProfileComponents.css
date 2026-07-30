@@ -2,8 +2,8 @@
   display: grid;
   place-items: center;
   border-radius: 50%;
-  background: linear-gradient(135deg, #3d4fe0 0%, #5c7aff 100%);
-  color: #fff;
+  background: #f3f5f7;
+  color: var(--color-primary);
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
@@ -11,6 +11,27 @@
 }
 
 .user-avatar-large--photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-avatar-button {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: #f3f5f7;
+  color: var(--color-primary);
+  font-weight: 700;
+  font-size: 14px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.profile-avatar-button img {
   width: 100%;
   height: 100%;
   object-fit: cover;

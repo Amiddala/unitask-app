@@ -1,31 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
-import DashboardLayout from '../../components/Dashboard/DashboardLayout';
-import ProfileInfoRow from '../../components/Profile/ProfileInfoRow';
 import SettingToggleRow from '../../components/Profile/SettingToggleRow';
 import './SettingsScreen.css';
 
-function getNameInitials(nombreCompleto) {
-  if (!nombreCompleto) return '??';
-  return nombreCompleto
-    .split(' ')
-    .filter(Boolean)
-    .map((part) => part[0])
-    .join('')
-    .slice(0, 2)
-    .toUpperCase();
-}
-
 function SettingsScreen() {
   const navigate = useNavigate();
-  const { user, dispatch } = useApp();
+  const { dispatch } = useApp();
   const [settings, setSettings] = useState({
     temaOscuro: false,
+    notificaciones: true,
   });
-  const [isEditingName, setIsEditingName] = useState(false);
-  const [tempNameValue, setTempNameValue] = useState(user?.nombreCompleto || '');
-  const [avatarPreview, setAvatarPreview] = useState(user?.avatarUrl || '');
 
   useEffect(() => {
     const stored = localStorage.getItem('unitask_settings');
@@ -43,47 +28,6 @@ function SettingsScreen() {
     document.body.classList.toggle('dark-theme', settings.temaOscuro);
   }, [settings.temaOscuro]);
 
-  const handleSaveName = () => {
-    if (!tempNameValue.trim()) return;
-    const updatedUser = {
-      ...user,
-      nombreCompleto: tempNameValue.trim(),
-      avatarIniciales: tempNameValue
-        .split(' ')
-        .filter(Boolean)
-        .map((part) => part[0])
-        .join('')
-        .slice(0, 2)
-        .toUpperCase(),
-      avatarUrl: user?.avatarUrl || '',
-    };
-
-    dispatch({ type: 'SET_USER', payload: updatedUser });
-    setIsEditingName(false);
-  };
-
-  const handleAvatarChange = async (event) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = () => {
-      const imageBase64 = reader.result;
-      setAvatarPreview(imageBase64);
-    };
-    reader.readAsDataURL(file);
-  };
-
-  const handleSaveProfilePhoto = () => {
-    if (!avatarPreview) return;
-    const updatedUser = {
-      ...user,
-      avatarUrl: avatarPreview,
-      avatarIniciales: user?.avatarIniciales || getNameInitials(user?.nombreCompleto),
-    };
-    dispatch({ type: 'SET_USER', payload: updatedUser });
-  };
-
   const handleLogout = () => {
     const confirmed = window.confirm('¿Deseas cerrar sesión?');
     if (!confirmed) return;
@@ -94,98 +38,53 @@ function SettingsScreen() {
   };
 
   return (
-    <DashboardLayout>
-      <section className="settings-screen__card">
-        <div className="settings-screen__header">
+    <main className="settings-screen-page">
+      <header className="settings-screen__topbar">
+        <button
+          type="button"
+          className="settings-screen__back-button"
+          onClick={() => {
+            if (window.history.length > 1) {
+              navigate(-1);
+            } else {
+              navigate('/perfil', { replace: true });
+            }
+          }}
+          aria-label="Back to profile"
+        >
+          ‹
+        </button>
+        <div>
           <h1>Configuración</h1>
-          <p>Personaliza tu cuenta y tus preferencias.</p>
+          <p>Administra tu cuenta y preferencias de la app.</p>
         </div>
+      </header>
 
-        <div className="settings-screen__section">
+      <section className="settings-screen__card">
+        <div className="settings-screen__section settings-screen__menu-section">
           <h2>Cuenta</h2>
-          <ProfileInfoRow label="Correo institucional" value={user?.correo || '---'} />
-          <ProfileInfoRow label="Nombre de usuario" value={user?.username || '---'} />
-          <div className="editable-info-row">
-            <div className="editable-info-row__header">
-              <span className="editable-info-row__label">Nombre completo</span>
-              <button
-                type="button"
-                className="editable-info-row__edit-trigger"
-                onClick={() => setIsEditingName((prev) => !prev)}
-              >
-                {isEditingName ? 'Cancelar' : 'Editar'}
-              </button>
-            </div>
-            {isEditingName ? (
-              <div className="editable-info-row__editor">
-                <input
-                  className="editable-info-row__input"
-                  value={tempNameValue}
-                  onChange={(e) => setTempNameValue(e.target.value)}
-                />
-                <div className="editable-info-row__actions">
-                  <button
-                    type="button"
-                    className="editable-info-row__button editable-info-row__button--secondary"
-                    onClick={() => {
-                      setIsEditingName(false);
-                      setTempNameValue(user?.nombreCompleto || '');
-                    }}
-                  >
-                    Cancelar
-                  </button>
-                  <button
-                    type="button"
-                    className="editable-info-row__button editable-info-row__button--primary"
-                    onClick={handleSaveName}
-                  >
-                    Guardar
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <ProfileInfoRow label="Nombre completo" value={user?.nombreCompleto || '---'} />
-            )}
-          </div>
+          <button
+            type="button"
+            className="settings-screen__menu-row"
+            onClick={() => navigate('/perfil/editar-cuenta')}
+          >
+            <span>Editar cuenta</span>
+            <span className="settings-screen__menu-arrow">›</span>
+          </button>
+          <button type="button" className="settings-screen__menu-row">
+            <span>Seguridad y contraseña</span>
+            <span className="settings-screen__menu-arrow">›</span>
+          </button>
         </div>
 
-        <div className="settings-screen__section">
-          <h2>Foto de perfil</h2>
-          <div className="settings-screen__avatar-upload">
-            <div className="settings-screen__avatar-preview">
-              {avatarPreview || user?.avatarUrl ? (
-                <img
-                  src={avatarPreview || user?.avatarUrl}
-                  alt="Vista previa de avatar"
-                  className="settings-screen__avatar-image"
-                />
-              ) : (
-                <span className="settings-screen__avatar-placeholder">Sin foto</span>
-              )}
-            </div>
-            <div className="settings-screen__avatar-actions">
-              <label className="settings-screen__avatar-input-label">
-                Seleccionar foto
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleAvatarChange}
-                />
-              </label>
-              <button
-                type="button"
-                className="settings-screen__button settings-screen__button--primary"
-                onClick={handleSaveProfilePhoto}
-                disabled={!avatarPreview}
-              >
-                Guardar foto
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <div className="settings-screen__section">
-          <h2>Preferencias</h2>
+        <div className="settings-screen__section settings-screen__menu-section">
+          <h2>Preferencias de la app</h2>
+          <SettingToggleRow
+            label="Notificaciones"
+            description="Recibe alertas sobre tu actividad."
+            checked={settings.notificaciones}
+            onChange={(e) => updateSettings({ ...settings, notificaciones: e.target.checked })}
+          />
           <SettingToggleRow
             label="Modo oscuro"
             description="Activa el modo oscuro en la interfaz."
@@ -194,11 +93,23 @@ function SettingsScreen() {
           />
         </div>
 
+        <div className="settings-screen__section settings-screen__menu-section">
+          <h2>Soporte</h2>
+          <button type="button" className="settings-screen__menu-row">
+            <span>Centro de ayuda</span>
+            <span className="settings-screen__menu-arrow">›</span>
+          </button>
+          <button type="button" className="settings-screen__menu-row">
+            <span>Términos y privacidad</span>
+            <span className="settings-screen__menu-arrow">›</span>
+          </button>
+        </div>
+
         <button type="button" className="logout-button" onClick={handleLogout}>
           Cerrar sesión
         </button>
       </section>
-    </DashboardLayout>
+    </main>
   );
 }
 

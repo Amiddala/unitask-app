@@ -1,14 +1,19 @@
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import './ProfileComponents.css';
 
 function NavigateToSettingsButton() {
   const navigate = useNavigate();
+  const location = useLocation();
 
   return (
     <button
       type="button"
       className="navigate-settings-button"
-      onClick={() => navigate('/perfil/configuracion')}
+      onClick={() =>
+        navigate('/perfil/configuracion', {
+          state: { from: location.state?.from || '/dashboard' },
+        })
+      }
       aria-label="Ir a configuración"
     >
       <span>Configuración</span>
