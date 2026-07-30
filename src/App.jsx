@@ -4,6 +4,7 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import LoginForm from './components/LoginForm/LoginForm';
 import DashboardScreen from './pages/DashboardScreen/DashboardScreen';
 import TasksScreen from './pages/TasksScreen/TasksScreen';
+import TaskDetailScreen from './pages/TaskDetailScreen/TaskDetailScreen';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
@@ -27,6 +28,15 @@ function App() {
         element={
           <ProtectedRoute>
             <TasksScreen />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/tareas/:id"
+        element={
+          <ProtectedRoute>
+            <TaskDetailScreen />
           </ProtectedRoute>
         }
       />

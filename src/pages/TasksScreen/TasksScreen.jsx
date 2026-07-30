@@ -86,13 +86,13 @@ export default function TasksScreen() {
                         <span>{deadlineText}</span>
                         </div>
                         
-                        {task.tipo === 'grupal' ? (
-                        <span className="subtasks-counter-text">
+                        {Array.isArray(task.subtareas) && task.subtareas.length > 0 ? (
+                            <span className="subtasks-counter-text">
                             {task.subtareasCompletadas}/{task.subtareasTotal} Subtareas
-                        </span>
+                            </span>
                         ) : (
-                        /* Espacio vacío para mantener el alineado si es personal y no tiene subtareas */
-                        <span></span>
+                            /* Espacio vacío de respaldo si la tarea verdaderamente no tiene subtareas creadas */
+                            <span></span>
                         )}
                     </div>
                     </div>

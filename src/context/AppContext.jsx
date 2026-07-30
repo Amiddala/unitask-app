@@ -100,6 +100,14 @@ function reducer(state, action) {
           t.id === action.payload.id ? { ...t, estado: action.payload.estado } : t,
         ),
       };
+    // CASO PARA LA HU-6 Y PODER AGREGAR SUBTAREAS
+    case 'UPDATE_TASK':
+      return {
+        ...state,
+        tasks: state.tasks.map((t) =>
+          t.id === action.payload.id ? action.payload : t
+        ),
+      };
     case 'LOGOUT':
       return { ...state, user: null };
     default:
