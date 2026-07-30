@@ -1,0 +1,25 @@
+.social-auth {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.social-auth__btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.social-auth__btn:hover {
+  background: #F8F9F6;
+}

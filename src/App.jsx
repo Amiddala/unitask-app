@@ -1,122 +1,122 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { Routes, Route } from 'react-router-dom';
+import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
+import RegisterForm from './components/RegisterForm/RegisterForm';
+import LoginForm from './components/LoginForm/LoginForm';
+import DashboardScreen from './pages/DashboardScreen/DashboardScreen';
+import TasksScreen from './pages/TasksScreen/TasksScreen';
+import GroupDetailScreen from './screens/GroupDetailScreen'; // Importacion US-09
+import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
+import SettingsScreen from './pages/SettingsScreen/SettingsScreen';
+import EditAccountScreen from './pages/EditAccountScreen/EditAccountScreen';
+import TaskDetailScreen from './pages/TaskDetailScreen/TaskDetailScreen';
+import ExamsScreen from './pages/ExamsScreen/ExamsScreen';
+import GroupsScreen from './pages/GroupsScreen/GroupsScreen';
+import HelpScreen from './pages/HelpScreen/HelpScreen';
+import NotImplementedScreen from './pages/NotImplementedScreen/NotImplementedScreen';
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
+import './App.css';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <Routes>
+      <Route path="/" element={<WelcomeScreen />} />
+      <Route path="/registro" element={<RegisterForm />} />
+      <Route path="/login" element={<LoginForm />} />
+      
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardScreen />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route
+        path="/perfil"
+        element={
+          <ProtectedRoute>
+            <ProfileScreen />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route
+        path="/perfil/configuracion"
+        element={
+          <ProtectedRoute>
+            <SettingsScreen />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route
+        path="/perfil/editar-cuenta"
+        element={
+          <ProtectedRoute>
+            <EditAccountScreen />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route
+        path="/tareas"
+        element={
+          <ProtectedRoute>
+            <TasksScreen />
+          </ProtectedRoute>
+        }
+      />
 
-      <div className="ticks"></div>
+      <Route
+        path="/tareas/:id"
+        element={
+          <ProtectedRoute>
+            <TaskDetailScreen />
+          </ProtectedRoute>
+        }
+      />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      {/* Implementacion US-09: Vista Detallada de Grupo */}
+      <Route
+        path="/grupos/:id"
+        element={
+          <ProtectedRoute>
+            <GroupDetailScreen />
+          </ProtectedRoute>
+        }
+      />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      <Route
+        path="/examenes"
+        element={
+          <ProtectedRoute>
+            <ExamsScreen />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/grupos"
+        element={
+          <ProtectedRoute>
+            <GroupsScreen />
+          </ProtectedRoute>
+        }
+      />
+      
+      <Route path="/ayuda" element={<HelpScreen />} />
+      
+      <Route
+        path="/en-desarrollo"
+        element={
+          <ProtectedRoute>
+            <NotImplementedScreen />
+          </ProtectedRoute>
+        }
+      />
+    </Routes>
+  );
 }
 
-export default App
+export default App;

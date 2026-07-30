@@ -1,0 +1,17 @@
+.dashboard-screen__heading {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0 0 12px;
+}
+
+.dashboard-screen__list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dashboard-screen__empty {
+  font-size: 13px;
+  color: var(--color-ink-muted);
+}

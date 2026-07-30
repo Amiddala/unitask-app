@@ -1,0 +1,220 @@
+.tasks-screen-container {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto;
+    min-height: 100vh;
+    padding: 40px 24px 120px 24px;
+    background-color: var(--color-bg);
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+}
+
+.tasks-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 28px;
+}
+
+.tasks-title {
+    font-family: var(--font-body); /* Cambiado a Inter según el diseño de la imagen */
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--color-ink);
+    margin: 0;
+}
+
+.user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #e5e8e1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: #555c6e;
+    font-size: 14px;
+    overflow: hidden;
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tasks-subtitle {
+    margin: 4px 0 0;
+    color: var(--color-ink-muted);
+    font-size: 14px;
+}
+
+.tasks-summary {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.tasks-summary__item {
+    flex: 1;
+    background: var(--color-surface);
+    border: 1px solid #ebede8;
+    border-radius: 18px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tasks-summary__label {
+    color: var(--color-ink-muted);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.tasks-summary__item strong {
+    font-size: 18px;
+    color: var(--color-ink);
+}
+
+/* TabSwitcher idéntico a Figma */
+.tab-switcher {
+    display: flex;
+    background-color: #eff1ec;
+    padding: 4px;
+    border-radius: var(--radius-md);
+    margin-bottom: 24px;
+}
+
+.tab-button {
+    flex: 1;
+    padding: 10px 2px;
+    border: none;
+    border-radius: calc(var(--radius-md) - 2px);
+    background-color: transparent;
+    color: var(--color-ink-muted);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all 0.2s ease;
+}
+
+.tab-button.active {
+    background-color: var(--color-surface);
+    font-weight: 600;
+    color: var(--color-ink);
+}
+
+.tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.no-tasks-message {
+    text-align: center;
+    color: var(--color-ink-muted);
+    margin-top: 40px;
+}
+
+/* La card alinea sus bloques en vertical */
+.task-card {
+    background-color: var(--color-surface);
+    padding: 20px 18px 16px 20px;
+    border-radius: var(--radius-md);
+    box-shadow: 0 4px 16px rgba(23, 27, 38, 0.02);
+    cursor: pointer;
+    border: 1px solid #ebede8;
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column; /* Alineación vertical de los 3 bloques */
+    gap: 4px;
+}
+
+.task-card.personal {
+    border-left: 5px solid var(--color-personal);
+}
+
+.task-card.grupal {
+    border-left: 5px solid var(--color-group);
+}
+
+/* Fila del título y el badge */
+.task-card-header {
+    display: flex;
+    justify-content: space-between; /* Título a la izq, badge a la der */
+    align-items: flex-start;
+    width: 100%;
+}
+
+.task-card-title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-ink);
+    max-width: 70%; /* Evita que títulos largos pisen el badge */
+    line-height: 1.3;
+}
+
+/* Badges con transparencias tal cual Figma */
+.task-badge-custom {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 16px;
+    border-radius: 20px;
+}
+
+.task-badge-custom.personal {
+    background-color: #e8f1ff;
+    color: var(--color-personal);
+}
+
+.task-badge-custom.grupal {
+    background-color: #f3e8ff;
+    color: var(--color-group);
+}
+
+/* Fila de la materia */
+.task-card-subject {
+    margin: 0 0 12px 0;
+    color: var(--color-ink-muted);
+    font-size: 14px;
+    text-align: left; /* Siempre abajo a la izquierda */
+}
+
+/* Fila inferior de los metadatos */
+.task-card-footer {
+    display: flex;
+    justify-content: space-between; /* Fecha a la izq, subtareas a la der */
+    align-items: center;
+    width: 100%;
+}
+
+.task-deadline-alert {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 14px;
+}
+
+.task-deadline-alert.urgent {
+    color: #d97706; /* Naranja/ocre de vencimiento cercano */
+}
+
+.task-deadline-alert.normal {
+    color: var(--color-ink-muted);
+}
+
+.clock-icon {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.subtasks-counter-text {
+    color: var(--color-ink-muted);
+    font-size: 13px;
+}

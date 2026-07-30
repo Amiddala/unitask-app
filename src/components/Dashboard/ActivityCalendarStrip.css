@@ -1,0 +1,60 @@
+.calendar-strip {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+
+.calendar-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.calendar-strip__day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  min-width: 44px;
+  padding: 10px 0;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.calendar-strip__day--selected {
+  background: var(--color-primary);
+}
+
+.calendar-strip__weekday {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: var(--color-ink-muted);
+}
+
+.calendar-strip__day--selected .calendar-strip__weekday {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.calendar-strip__number {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.calendar-strip__day--selected .calendar-strip__number {
+  color: #fff;
+}
+
+.calendar-strip__dots {
+  display: flex;
+  gap: 3px;
+  height: 6px;
+}
+
+.calendar-strip__dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
