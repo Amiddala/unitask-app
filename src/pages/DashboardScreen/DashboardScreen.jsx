@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import DashboardLayout from '../../components/Dashboard/DashboardLayout';
 import ActivityCalendarStrip from '../../components/Dashboard/ActivityCalendarStrip';
+import ActivityAlertBanner from '../../components/Dashboard/ActivityAlertBanner';
 import UpcomingTaskCard from '../../components/Dashboard/UpcomingTaskCard';
 import UpcomingExamCard from '../../components/Dashboard/UpcomingExamCard';
 import FloatingActionButton from '../../components/shared/FloatingActionButton';
@@ -14,12 +15,61 @@ function sortByDate(items) {
 function DashboardScreen() {
   const { tasks, exams, calendarEvents } = useApp();
   const [selectedDay, setSelectedDay] = useState(new Date());
+  const [visibleActivities, setVisibleActivities] = useState([]);
 
   const upcomingTasks = sortByDate(tasks).slice(0, 4);
   const upcomingExams = sortByDate(exams).slice(0, 3);
 
+  const criticalActivities = useMemo(() => {
+    const now = new Date();
+    const tomorrow = new Date(now);
+    tomorrow.setDate(now.getDate() + 1);
+
+    const isCriticalDate = (fechaLimite) => {
+      const date = new Date(fechaLimite);
+      return date <= tomorrow;
+    };
+
+    const taskActivities = tasks
+      .filter((task) => isCriticalDate(task.fechaLimite))
+      .map((task) => ({
+        ...task,
+        type: task.tipo === 'grupal' ? 'grupal' : 'personal',
+        title: task.titulo,
+      }));
+
+    const examActivities = exams
+      .filter((exam) => isCriticalDate(exam.fechaLimite))
+      .map((exam) => ({
+        ...exam,
+        type: 'examen',
+        title: exam.titulo,
+      }));
+
+    return [...taskActivities, ...examActivities].sort(
+      (a, b) => new Date(a.fechaLimite) - new Date(b.fechaLimite),
+    );
+  }, [tasks, exams]);
+
+  useEffect(() => {
+    setVisibleActivities(criticalActivities);
+  }, [criticalActivities]);
+
+  const dismissActivity = (id) => {
+    setVisibleActivities((currentActivities) =>
+      currentActivities.filter((activity) => activity.id !== id),
+    );
+  };
+
   return (
     <DashboardLayout>
+      {visibleActivities.length > 0 && (
+        <ActivityAlertBanner
+          criticalActivities={visibleActivities}
+          onDismissItem={dismissActivity}
+        />
+      )}
+
       <ActivityCalendarStrip
         selectedDay={selectedDay}
         onSelectDay={setSelectedDay}

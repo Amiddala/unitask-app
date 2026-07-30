@@ -1,0 +1,92 @@
+.activity-alert-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: linear-gradient(90deg, #f97316, #fb923c);
+  color: #fff;
+  border-radius: 22px;
+  padding: 16px;
+  box-shadow: 0 20px 40px rgba(251, 146, 60, 0.22);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.activity-alert-banner__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+}
+
+.activity-alert-banner__content {
+  flex: 1;
+  min-width: 0;
+}
+
+.activity-alert-banner__title {
+  margin: 0;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.activity-alert-banner__list {
+  display: grid;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.activity-alert-banner__item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  border-radius: 16px;
+  padding: 12px 14px;
+}
+
+.activity-alert-banner__item-meta {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+}
+
+.activity-alert-banner__item-label {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  opacity: 0.9;
+}
+
+.activity-alert-banner__item-title {
+  font-size: 14px;
+  color: #ffffff;
+}
+
+.activity-alert-banner__item-date {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.activity-alert-banner__close,
+.activity-alert-banner__item-close {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.activity-alert-banner__close:hover,
+.activity-alert-banner__item-close:hover {
+  opacity: 1;
+}
