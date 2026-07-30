@@ -3,11 +3,11 @@ import GroupTabs from '../components/Groups/GroupTabs';
 import JoinMeetingButton from '../components/Groups/JoinMeetingButton';
 import AnnouncementCard from '../components/Groups/AnnouncementCard';
 import InviteCodeChip from '../components/Groups/InviteCodeChip';
+import './GroupDetailScreen.css'; // Importacion de la hoja de estilos
 
 /*
  * Componente: GroupDetailScreen
- * Proposito: Renderiza la vista detallada de un grupo seleccionado.
- * Maneja el estado de la navegacion interna (Anuncios, Apuntes, Participantes).
+ * Proposito: Vista detallada principal.
  */
 const GroupDetailScreen = () => {
   const [activeTab, setActiveTab] = useState('anuncios');
@@ -38,7 +38,7 @@ const GroupDetailScreen = () => {
     switch (activeTab) {
       case 'anuncios':
         return (
-          <div className="p-4">
+          <div className="group-content-padding">
             <JoinMeetingButton url="https://meet.google.com/mock" />
             {mockGroupData.announcements.map((announcement) => (
               <AnnouncementCard key={announcement.id} data={announcement}>
@@ -50,29 +50,29 @@ const GroupDetailScreen = () => {
           </div>
         );
       case 'apuntes':
-        return <div className="p-4 text-gray-500 text-sm border-2 border-dashed border-gray-300 rounded-lg text-center mt-4">Contenido de Apuntes en construcción (US-11)</div>;
+        return <div className="group-content-padding">Apuntes en construcción (US-11)</div>;
       case 'participantes':
-        return <div className="p-4 text-gray-500 text-sm border-2 border-dashed border-gray-300 rounded-lg text-center mt-4">Lista de Participantes en construcción</div>;
+        return <div className="group-content-padding">Participantes en construcción</div>;
       default:
         return null;
     }
   };
 
   return (
-    <div className="flex flex-col h-screen bg-gray-50">
-      <header className="flex justify-between items-center p-4 bg-white shadow-sm border-b border-gray-200">
+    <div className="group-screen">
+      <header className="group-header">
         <div>
-          <h1 className="text-xl font-bold text-gray-900">{mockGroupData.name}</h1>
-          <h2 className="text-sm text-gray-500">{mockGroupData.subject}</h2>
+          <h1 className="group-title">{mockGroupData.name}</h1>
+          <h2 className="group-subtitle">{mockGroupData.subject}</h2>
         </div>
-        <button aria-label="Opciones del grupo" className="p-2 text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
-          <span className="text-xl font-bold leading-none">...</span>
+        <button aria-label="Opciones del grupo" className="group-options-btn">
+          ...
         </button>
       </header>
 
       <GroupTabs activeTab={activeTab} onTabChange={setActiveTab} />
 
-      <main className="flex-1 overflow-y-auto">
+      <main className="group-main">
         {renderActiveTabContent()}
       </main>
     </div>
