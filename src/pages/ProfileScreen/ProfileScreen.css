@@ -1,0 +1,38 @@
+.profile-screen__card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-soft);
+}
+
+.profile-screen__header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+
+.profile-screen__user-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-screen__name {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.profile-screen__username {
+  font-size: 14px;
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+.profile-screen__details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 24px;
+}

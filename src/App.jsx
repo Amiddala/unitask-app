@@ -4,6 +4,8 @@ import RegisterForm from './components/RegisterForm/RegisterForm';
 import LoginForm from './components/LoginForm/LoginForm';
 import DashboardScreen from './pages/DashboardScreen/DashboardScreen';
 import TasksScreen from './pages/TasksScreen/TasksScreen';
+import ProfileScreen from './pages/ProfileScreen/ProfileScreen';
+import SettingsScreen from './pages/SettingsScreen/SettingsScreen';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
@@ -18,6 +20,22 @@ function App() {
         element={
           <ProtectedRoute>
             <DashboardScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/perfil"
+        element={
+          <ProtectedRoute>
+            <ProfileScreen />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/perfil/configuracion"
+        element={
+          <ProtectedRoute>
+            <SettingsScreen />
           </ProtectedRoute>
         }
       />
