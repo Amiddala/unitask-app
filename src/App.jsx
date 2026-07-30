@@ -5,6 +5,7 @@ import LoginForm from './components/LoginForm/LoginForm';
 import DashboardScreen from './pages/DashboardScreen/DashboardScreen';
 import TasksScreen from './pages/TasksScreen/TasksScreen';
 import TaskDetailScreen from './pages/TaskDetailScreen/TaskDetailScreen';
+import ExamsScreen from './pages/ExamsScreen/ExamsScreen';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
 
@@ -40,6 +41,16 @@ function App() {
           </ProtectedRoute>
         }
       />
+
+      <Route
+        path="/examenes"
+        element={
+          <ProtectedRoute>
+            <ExamsScreen />
+          </ProtectedRoute>
+        }
+      />
+      
     </Routes>
   );
 }
