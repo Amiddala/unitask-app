@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import './GroupDetailScreen.css';
 import CreateAnnouncementModal from '../components/Groups/CreateAnnouncementModal';
+import AddNoteModal from '../components/Groups/AddNoteModal';
 
 const GroupDetailScreen = () => {
   const [activeTab, setActiveTab] = useState('novedades');
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAnnouncementModalOpen, setIsAnnouncementModalOpen] = useState(false);
+  const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
   
-  // Estado local para simular los anuncios cargados desde el backend
   const [announcements, setAnnouncements] = useState([
     {
       id: 1,
@@ -16,7 +17,17 @@ const GroupDetailScreen = () => {
     }
   ]);
 
-  // Procesa el texto del modal y lo agrega a la lista de anuncios
+  const [notes, setNotes] = useState([
+    {
+      id: 1,
+      title: 'Guía de Arquitectura Limpia',
+      description: 'Documento base para el proyecto final.',
+      link: 'https://docs.google.com/ejemplo',
+      author: 'camiii',
+      time: 'Ayer'
+    }
+  ]);
+
   const handlePublishAnnouncement = (text) => {
     const newAnnouncement = {
       id: Date.now(),
@@ -24,9 +35,21 @@ const GroupDetailScreen = () => {
       time: 'Justo ahora',
       content: text
     };
-    
     setAnnouncements([newAnnouncement, ...announcements]);
-    setIsModalOpen(false);
+    setIsAnnouncementModalOpen(false);
+  };
+
+  const handleAddNote = (noteData) => {
+    const newNote = {
+      id: Date.now(),
+      title: noteData.title,
+      description: noteData.description,
+      link: noteData.link,
+      author: 'camiii',
+      time: 'Justo ahora'
+    };
+    setNotes([newNote, ...notes]);
+    setIsNoteModalOpen(false);
   };
 
   return (
@@ -62,14 +85,13 @@ const GroupDetailScreen = () => {
 
       <main className="group-main">
         <div className="group-content-padding">
+          
           {activeTab === 'novedades' && (
             <>
-              {/* Boton disparador del modal */}
-              <button className="join-meeting-btn" onClick={() => setIsModalOpen(true)}>
+              <button className="join-meeting-btn" onClick={() => setIsAnnouncementModalOpen(true)}>
                 + Crear Nuevo Anuncio
               </button>
 
-              {/* Renderizado dinamico de anuncios */}
               {announcements.map((announcement) => (
                 <div key={announcement.id} className="announcement-card">
                   <div className="announcement-header">
@@ -91,17 +113,52 @@ const GroupDetailScreen = () => {
               </div>
             </>
           )}
+
+          {activeTab === 'trabajos' && (
+            <>
+              <button className="join-meeting-btn" onClick={() => setIsNoteModalOpen(true)}>
+                + Agregar Nuevo Apunte
+              </button>
+
+              {notes.map((note) => (
+                <div key={note.id} className="announcement-card">
+                  <div className="announcement-header">
+                    <div className="announcement-avatar">
+                      {note.author.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="announcement-meta">
+                      <h3 className="announcement-author">{note.title}</h3>
+                      <p className="announcement-time">Subido por {note.author} • {note.time}</p>
+                    </div>
+                  </div>
+                  {note.description && <p className="announcement-content" style={{marginBottom: '10px'}}>{note.description}</p>}
+                  {note.link && (
+                    <a href={note.link} target="_blank" rel="noopener noreferrer" style={{color: '#0066ff', textDecoration: 'none', fontSize: '0.875rem', fontWeight: '500'}}>
+                      🔗 Ver Documento
+                    </a>
+                  )}
+                </div>
+              ))}
+            </>
+          )}
+
         </div>
       </main>
 
-      {/* Componente Modal */}
       <CreateAnnouncementModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        isOpen={isAnnouncementModalOpen}
+        onClose={() => setIsAnnouncementModalOpen(false)}
         onPublish={handlePublishAnnouncement}
+      />
+
+      <AddNoteModal
+        isOpen={isNoteModalOpen}
+        onClose={() => setIsNoteModalOpen(false)}
+        onAddNote={handleAddNote}
       />
     </div>
   );
 };
 
 export default GroupDetailScreen;
+
