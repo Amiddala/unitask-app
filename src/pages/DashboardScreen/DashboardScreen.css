@@ -1,3 +1,16 @@
+.dashboard-screen__calendar-section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.dashboard-screen__calendar-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 500;
+  margin: 0;
+}
+
 .dashboard-screen__heading {
   font-family: var(--font-display);
   font-size: 16px;
