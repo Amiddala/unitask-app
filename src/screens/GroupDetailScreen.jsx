@@ -1,96 +1,164 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import GroupTabs from '../components/Groups/GroupTabs';
-import JoinMeetingButton from '../components/Groups/JoinMeetingButton';
-import AnnouncementCard from '../components/Groups/AnnouncementCard';
-import InviteCodeChip from '../components/Groups/InviteCodeChip';
+import { useState } from 'react';
 import './GroupDetailScreen.css';
+import CreateAnnouncementModal from '../components/groups/CreateAnnouncementModal';
+import AddNoteModal from '../components/groups/AddNoteModal';
 
-/*
- * Componente: GroupDetailScreen
- * Proposito: Vista detallada principal del grupo. Gestiona la navegacion interna
- * y el renderizado condicional de las pestanas de anuncios, apuntes y participantes.
- */
 const GroupDetailScreen = () => {
-  const [activeTab, setActiveTab] = useState('anuncios');
-  const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState('novedades');
+  const [isAnnouncementModalOpen, setIsAnnouncementModalOpen] = useState(false);
+  const [isNoteModalOpen, setIsNoteModalOpen] = useState(false);
+  
+  const [announcements, setAnnouncements] = useState([
+    {
+      id: 1,
+      author: 'Docente',
+      time: 'Hace 2 horas',
+      content: 'Bienvenidos al grupo. Por favor revisen el material adjunto en la plataforma.'
+    }
+  ]);
 
-  // Datos simulados basados en el prototipo UI
-  const mockGroupData = {
-    name: "Equipo Alfa - Prototipo",
-    subject: "Interacción Humano Computador",
-    announcements: [
-      {
-        id: 1,
-        author: "Israel Orosco",
-        avatar: "IO",
-        time: "Hoy a las 14:30",
-        content: "Mañana será la clase virtual por el paro. Por favor revisen la lectura antes de entrar."
-      },
-      {
-        id: 2,
-        author: "Camila Magne",
-        avatar: "CM",
-        time: "Ayer a las 18:45",
-        content: "Chicos, este es el código de invitación para los que faltan unirse al grupo:",
-        inviteCode: "ALFA-2026"
-      }
-    ]
+  const [notes, setNotes] = useState([
+    {
+      id: 1,
+      title: 'Guía de Arquitectura Limpia',
+      description: 'Documento base para el proyecto final.',
+      link: 'https://docs.google.com/ejemplo',
+      author: 'camiii',
+      time: 'Ayer'
+    }
+  ]);
+
+  const handlePublishAnnouncement = (text) => {
+    const newAnnouncement = {
+      id: Date.now(),
+      author: 'camiii',
+      time: 'Justo ahora',
+      content: text
+    };
+    setAnnouncements([newAnnouncement, ...announcements]);
+    setIsAnnouncementModalOpen(false);
   };
 
-  const renderActiveTabContent = () => {
-    switch (activeTab) {
-      case 'anuncios':
-        return (
-          <div className="group-content-padding">
-            <JoinMeetingButton url="https://meet.google.com/mock" />
-            {mockGroupData.announcements.map((announcement) => (
-              <AnnouncementCard key={announcement.id} data={announcement}>
-                {announcement.inviteCode && (
-                  <InviteCodeChip code={announcement.inviteCode} />
-                )}
-              </AnnouncementCard>
-            ))}
-          </div>
-        );
-      case 'apuntes':
-        return <div className="group-content-padding">Apuntes en construcción (US-11)</div>;
-      case 'participantes':
-        return <div className="group-content-padding">Participantes en construcción</div>;
-      default:
-        return null;
-    }
+  const handleAddNote = (noteData) => {
+    const newNote = {
+      id: Date.now(),
+      title: noteData.title,
+      description: noteData.description,
+      link: noteData.link,
+      author: 'camiii',
+      time: 'Justo ahora'
+    };
+    setNotes([newNote, ...notes]);
+    setIsNoteModalOpen(false);
   };
 
   return (
     <div className="group-screen">
       <header className="group-header">
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <button 
-            onClick={() => navigate(-1)} 
-            className="group-options-btn"
-            style={{ marginRight: '12px', fontSize: '1.5rem' }}
-            aria-label="Volver atrás"
-          >
-            &#8249;
-          </button>
-          <div>
-            <h1 className="group-title">{mockGroupData.name}</h1>
-            <h2 className="group-subtitle">{mockGroupData.subject}</h2>
-          </div>
+        <div>
+          <h1 className="group-title">Desarrollo de Software</h1>
+          <p className="group-subtitle">Grupo 1</p>
         </div>
-        <button aria-label="Opciones del grupo" className="group-options-btn">
-          ...
-        </button>
+        <button className="group-options-btn">⋮</button>
       </header>
 
-      <GroupTabs activeTab={activeTab} onTabChange={setActiveTab} />
+      <div className="group-tabs-container">
+        <button 
+          className={`group-tab-btn ${activeTab === 'novedades' ? 'active' : ''}`}
+          onClick={() => setActiveTab('novedades')}
+        >
+          Novedades
+        </button>
+        <button 
+          className={`group-tab-btn ${activeTab === 'trabajos' ? 'active' : ''}`}
+          onClick={() => setActiveTab('trabajos')}
+        >
+          Trabajos
+        </button>
+        <button 
+          className={`group-tab-btn ${activeTab === 'personas' ? 'active' : ''}`}
+          onClick={() => setActiveTab('personas')}
+        >
+          Personas
+        </button>
+      </div>
 
       <main className="group-main">
-        {renderActiveTabContent()}
+        <div className="group-content-padding">
+          
+          {activeTab === 'novedades' && (
+            <>
+              <button className="join-meeting-btn" onClick={() => setIsAnnouncementModalOpen(true)}>
+                + Crear Nuevo Anuncio
+              </button>
+
+              {announcements.map((announcement) => (
+                <div key={announcement.id} className="announcement-card">
+                  <div className="announcement-header">
+                    <div className="announcement-avatar">
+                      {announcement.author.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="announcement-meta">
+                      <h3 className="announcement-author">{announcement.author}</h3>
+                      <p className="announcement-time">{announcement.time}</p>
+                    </div>
+                  </div>
+                  <p className="announcement-content">{announcement.content}</p>
+                </div>
+              ))}
+              
+              <div className="invite-code-chip">
+                <span className="invite-code-label">Código de invitación:</span>
+                X7B9-K2M
+              </div>
+            </>
+          )}
+
+          {activeTab === 'trabajos' && (
+            <>
+              <button className="join-meeting-btn" onClick={() => setIsNoteModalOpen(true)}>
+                + Agregar Nuevo Apunte
+              </button>
+
+              {notes.map((note) => (
+                <div key={note.id} className="announcement-card">
+                  <div className="announcement-header">
+                    <div className="announcement-avatar">
+                      {note.author.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="announcement-meta">
+                      <h3 className="announcement-author">{note.title}</h3>
+                      <p className="announcement-time">Subido por {note.author} • {note.time}</p>
+                    </div>
+                  </div>
+                  {note.description && <p className="announcement-content" style={{marginBottom: '10px'}}>{note.description}</p>}
+                  {note.link && (
+                    <a href={note.link} target="_blank" rel="noopener noreferrer" style={{color: '#0066ff', textDecoration: 'none', fontSize: '0.875rem', fontWeight: '500'}}>
+                      🔗 Ver Documento
+                    </a>
+                  )}
+                </div>
+              ))}
+            </>
+          )}
+
+        </div>
       </main>
+
+      <CreateAnnouncementModal
+        isOpen={isAnnouncementModalOpen}
+        onClose={() => setIsAnnouncementModalOpen(false)}
+        onPublish={handlePublishAnnouncement}
+      />
+
+      <AddNoteModal
+        isOpen={isNoteModalOpen}
+        onClose={() => setIsNoteModalOpen(false)}
+        onAddNote={handleAddNote}
+      />
     </div>
   );
 };
 
 export default GroupDetailScreen;
+
