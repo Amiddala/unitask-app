@@ -138,7 +138,7 @@ export default function ExamsScreen() {
         )}
 
         {/* Botón Acción Flotante */}
-        <FloatingActionButton onClick={() => alert('Crear Examen próximamente')} />
+        <FloatingActionButton onClick={() => navigate('/en-desarrollo')} />
 
         <BottomNavBar activeTab='examenes'/>
         </div>

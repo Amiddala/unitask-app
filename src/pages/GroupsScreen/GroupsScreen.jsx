@@ -145,7 +145,7 @@ export default function GroupsScreen() {
             </div>
         )}
 
-        <FloatingActionButton onClick={() => alert('Crear Nuevo Grupo próximamente')} />
+        <FloatingActionButton onClick={() => navigate('/en-desarrollo')} />
         <BottomNavBar activeTab="grupos" />
         </div>
     );
