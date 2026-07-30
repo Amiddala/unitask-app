@@ -2,7 +2,7 @@ import React from 'react';
 
 /*
  * Componente: JoinMeetingButton
- * Proposito: Boton de accion principal para redireccionar a la sala de videollamada externa.
+ * Proposito: Redireccion a la sala de videollamada con icono representativo.
  */
 const JoinMeetingButton = ({ url }) => {
   return (
@@ -10,9 +10,23 @@ const JoinMeetingButton = ({ url }) => {
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="flex items-center justify-center w-full py-3 mb-4 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg shadow-sm hover:bg-gray-50 transition-colors"
+      className="join-meeting-btn"
     >
-      <span className="mr-2">Unirse a Google Meet</span>
+      <svg 
+        width="18" 
+        height="18" 
+        viewBox="0 0 24 24" 
+        fill="none" 
+        stroke="currentColor" 
+        strokeWidth="2" 
+        strokeLinecap="round" 
+        strokeLinejoin="round" 
+        style={{ marginRight: '8px' }}
+      >
+        <path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14v-4z" />
+        <rect x="3" y="6" width="12" height="12" rx="2" ry="2" />
+      </svg>
+      <span>Unirse a Google Meet</span>
     </a>
   );
 };

@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import GroupTabs from '../components/Groups/GroupTabs';
 import JoinMeetingButton from '../components/Groups/JoinMeetingButton';
 import AnnouncementCard from '../components/Groups/AnnouncementCard';
 import InviteCodeChip from '../components/Groups/InviteCodeChip';
-import './GroupDetailScreen.css'; // Importacion de la hoja de estilos
+import './GroupDetailScreen.css';
 
 /*
  * Componente: GroupDetailScreen
- * Proposito: Vista detallada principal.
+ * Proposito: Vista detallada principal del grupo. Gestiona la navegacion interna
+ * y el renderizado condicional de las pestanas de anuncios, apuntes y participantes.
  */
 const GroupDetailScreen = () => {
   const [activeTab, setActiveTab] = useState('anuncios');
+  const navigate = useNavigate();
 
+  // Datos simulados basados en el prototipo UI
   const mockGroupData = {
     name: "Equipo Alfa - Prototipo",
     subject: "Interacción Humano Computador",
@@ -61,9 +65,19 @@ const GroupDetailScreen = () => {
   return (
     <div className="group-screen">
       <header className="group-header">
-        <div>
-          <h1 className="group-title">{mockGroupData.name}</h1>
-          <h2 className="group-subtitle">{mockGroupData.subject}</h2>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <button 
+            onClick={() => navigate(-1)} 
+            className="group-options-btn"
+            style={{ marginRight: '12px', fontSize: '1.5rem' }}
+            aria-label="Volver atrás"
+          >
+            &#8249;
+          </button>
+          <div>
+            <h1 className="group-title">{mockGroupData.name}</h1>
+            <h2 className="group-subtitle">{mockGroupData.subject}</h2>
+          </div>
         </div>
         <button aria-label="Opciones del grupo" className="group-options-btn">
           ...
