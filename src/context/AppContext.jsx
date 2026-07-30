@@ -69,6 +69,32 @@ const initialExams = [
   },
 ];
 
+const initialGroups = [
+  {
+    id: 'g1',
+    nombre: 'Equipo Alfa - Prototipo',
+    materia: 'Interacción Humano Computador',
+    participantes: ['MM', 'CM', 'JP', 'AN', 'TL'],
+    tieneReunionActiva: false
+  },
+  {
+    id: 'g2',
+    nombre: 'Grupo 4: Desarrollo Backend',
+    materia: 'Taller de Ingeniería de Software',
+    participantes: ['AR', 'CM'],
+    tieneReunionActiva: true
+  }
+];
+
+const initialInvitations = [
+  {
+    id: 'i1',
+    nombre: 'Los Algorítmicos',
+    materia: 'Estructura de Datos',
+    remitente: 'Carlos Mendoza'
+  }
+];
+
 function buildCalendarEvents(tasks, exams) {
   const map = {};
   const addEvent = (dateStr, type) => {
@@ -102,7 +128,8 @@ const initialState = {
   user: readStoredUser(),
   tasks: initialTasks,
   exams: initialExams,
-  groups: [],
+  groups: initialGroups,
+  invitation: initialInvitations,
 };
 
 function reducer(state, action) {
@@ -127,6 +154,18 @@ function reducer(state, action) {
         tasks: state.tasks.map((t) =>
           t.id === action.payload.id ? action.payload : t
         ),
+      };
+    // CASO PARA LA HU-8
+    case 'ACCEPT_INVITATION':
+      return {
+        ...state,
+        invitations: state.invitations.filter(inv => inv.id !== action.payload.id),
+        groups: [...state.groups, action.payload.newGroup]
+      };
+    case 'DECLINE_INVITATION':
+      return {
+        ...state,
+        invitations: state.invitations.filter(inv => inv.id !== action.payload)
       };
     case 'LOGOUT':
       return { ...state, user: null };
