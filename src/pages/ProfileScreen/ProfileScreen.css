@@ -167,12 +167,43 @@
 
 .profile-screen__group-card {
   display: flex;
-  justify-content: space-between;
   align-items: center;
   gap: 14px;
   padding: 16px;
   border-radius: 18px;
   background: #f8fafc;
+}
+
+.profile-screen__group-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(155, 93, 229, 0.14);
+  color: #7c3aed;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.profile-screen__group-card-meta {
+  flex: 1;
+  min-width: 0;
+}
+
+.profile-screen__group-card-meta p {
+  margin: 0;
+}
+
+.profile-screen__group-card-meta .profile-screen__group-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.profile-screen__group-card-meta .profile-screen__group-description {
+  margin-top: 6px;
+  font-size: 13px;
+  color: var(--color-ink-muted);
 }
 
 .profile-screen__group-card > div {

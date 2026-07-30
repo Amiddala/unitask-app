@@ -17,8 +17,9 @@ function getNameInitials(nombreCompleto) {
 
 function ProfileScreen() {
   const navigate = useNavigate();
-  const { user, tasks } = useApp();
+  const { user, tasks, groups } = useApp();
   const initials = user?.avatarIniciales || getNameInitials(user?.nombreCompleto);
+  const activeGroups = groups;
 
   const handleGoBack = () => {
     if (window.history.length > 1) {
@@ -30,11 +31,6 @@ function ProfileScreen() {
 
   const taskCompletedCount = tasks.filter((task) => task.estado === 'completadas').length;
   const taskPendingCount = tasks.filter((task) => task.estado === 'pendiente').length;
-  const groups = [
-    { id: 'g1', name: 'agroIA', description: 'Diagnóstico con YOLOv5', badge: '+3', active: true },
-    { id: 'g2', name: 'Snapfilm', description: 'Desarrollo Frontend', badge: '+1', active: true },
-    { id: 'g3', name: 'SediLab', description: 'Proyecto de IA aplicada', badge: '+2', active: false },
-  ];
 
   return (
     <main className="profile-screen-page">
@@ -87,17 +83,24 @@ function ProfileScreen() {
 
         <div className="profile-screen__groups">
           <h2>Grupos activos</h2>
-          {groups.map((group) => (
-            <div key={group.id} className="profile-screen__group-card">
-              <div>
-                <p className="profile-screen__group-name">{group.name}</p>
-                <p className="profile-screen__group-description">{group.description}</p>
+          {activeGroups.length === 0 ? (
+            <p className="profile-screen__no-groups">No tienes grupos activos ahora mismo.</p>
+          ) : (
+            activeGroups.map((group) => (
+              <div key={group.id} className="profile-screen__group-card">
+                <div className="profile-screen__group-icon" aria-hidden="true">
+                  ✓
+                </div>
+                <div className="profile-screen__group-card-meta">
+                  <p className="profile-screen__group-name">{group.nombre}</p>
+                  <p className="profile-screen__group-description">{group.materia}</p>
+                </div>
+                <span className="profile-screen__group-badge active">
+                  {group.participantes.length} participantes
+                </span>
               </div>
-              <span className={`profile-screen__group-badge ${group.active ? 'active' : ''}`}>
-                {group.badge}
-              </span>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </section>
     </main>

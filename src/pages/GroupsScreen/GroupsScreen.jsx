@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
+import ProfileAvatarButton from '../../components/Profile/ProfileAvatarButton';
 import FloatingActionButton from '../../components/shared/FloatingActionButton';
 import BottomNavBar from '../../components/shared/BottomNavBar';
 import './GroupsScreen.css';
 
 export default function GroupsScreen() {
     const navigate = useNavigate();
-    const { groups=[], invitations=[], dispatch } = useApp();
+    const { user, groups=[], invitations=[], dispatch } = useApp();
     const [activeTab, setActiveTab] = useState('misGrupos');
 
     const handleGroupClick = (groupId) => {
@@ -42,7 +43,12 @@ export default function GroupsScreen() {
         <div className="groups-screen-container">
         <div className="groups-header">
             <h1>Grupos</h1>
-            <div className="user-avatar-badge">CM</div>
+            <ProfileAvatarButton
+              initials={user?.avatarIniciales || '??'}
+              avatarUrl={user?.avatarUrl}
+              ariaLabel="Perfil"
+              onClick={() => navigate('/perfil')}
+            />
         </div>
 
         <div className="groups-tabs-container">
