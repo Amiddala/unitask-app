@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './GroupDetailScreen.css';
-import CreateAnnouncementModal from '../components/Groups/CreateAnnouncementModal';
+import CreateAnnouncementModal from "../components/groups/CreateAnnouncementModal";
 
 const GroupDetailScreen = () => {
   const [activeTab, setActiveTab] = useState('novedades');
