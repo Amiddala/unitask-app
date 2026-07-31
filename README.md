@@ -23,7 +23,7 @@ UniTask permite a los estudiantes:
 
 ---
 
-## 🛠️ Stack Tecnológico
+## Stack Tecnológico
 
 - **React** (componentes funcionales + Hooks)
 - **Vite** — bundler y dev server
@@ -120,7 +120,7 @@ Antes de mergear a `develop`/`main`, correr `npm run build` localmente para conf
 
 ---
 
-## 🚢 Despliegue
+## Despliegue
 
 El proyecto se despliega automáticamente en **Vercel** a partir de la rama `develop`:
 
