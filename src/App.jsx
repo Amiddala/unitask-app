@@ -16,7 +16,7 @@ import HelpScreen from './pages/HelpScreen/HelpScreen';
 import NotImplementedScreen from './pages/NotImplementedScreen/NotImplementedScreen';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
-import AddActivityScreen from './pages/AddActivityScreen';
+
 
 function App() {
   return (
