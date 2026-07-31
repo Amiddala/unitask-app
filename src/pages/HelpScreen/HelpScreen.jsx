@@ -30,8 +30,13 @@ function HelpScreen() {
   return (
     <main className="help-screen-page">
       <header className="help-screen-header">
-        <button type="button" className="help-screen__back-button" onClick={() => navigate(-1)}>
-          ← Volver
+        <button
+          type="button"
+          className="help-screen__back-button"
+          onClick={() => navigate(-1)}
+          aria-label="Volver"
+        >
+          ‹
         </button>
         <div>
           <h1>Centro de ayuda</h1>

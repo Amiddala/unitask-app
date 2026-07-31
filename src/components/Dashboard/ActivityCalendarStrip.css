@@ -10,6 +10,31 @@
   display: none;
 }
 
+.calendar-strip__legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px 16px;
+  margin-top: 12px;
+  padding: 0 6px;
+}
+
+.calendar-strip__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: var(--color-ink-muted);
+}
+
+.calendar-strip__legend-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
 .calendar-strip__day {
   display: flex;
   flex-direction: column;

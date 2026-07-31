@@ -12,6 +12,9 @@
 
   --color-primary: #3d4fe0;
   --color-primary-dark: #2e3ab0;
+  --color-primary-soft: #e9edff;
+  --avatar-initials-bg: var(--color-primary-soft);
+  --avatar-initials-color: var(--color-primary-dark);
 
   --color-exam: #ff5b54;
   --color-personal: #3d8bff;

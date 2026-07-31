@@ -117,11 +117,28 @@ function DashboardScreen() {
         />
       )}
 
-      <ActivityCalendarStrip
-        selectedDay={selectedDay}
-        onSelectDay={setSelectedDay}
-        calendarEvents={calendarEvents}
-      />
+      <section className="dashboard-screen__calendar-section">
+        <h2 className="dashboard-screen__calendar-title">Calendario de actividades</h2>
+        <ActivityCalendarStrip
+          selectedDay={selectedDay}
+          onSelectDay={setSelectedDay}
+          calendarEvents={calendarEvents}
+        />
+        <div className="calendar-strip__legend" aria-label="Leyenda del calendario de actividades">
+          <span className="calendar-strip__legend-item">
+            <span className="calendar-strip__legend-dot" style={{ background: 'var(--color-personal)' }} />
+            Examen
+          </span>
+          <span className="calendar-strip__legend-item">
+            <span className="calendar-strip__legend-dot" style={{ background: 'var(--color-exam)' }} />
+            Personal
+          </span>
+          <span className="calendar-strip__legend-item">
+            <span className="calendar-strip__legend-dot" style={{ background: 'var(--color-group)' }} />
+            Grupal
+          </span>
+        </div>
+      </section>
 
       <section className="dashboard-screen__section">
         <h2 className="dashboard-screen__heading">Tareas próximas</h2>

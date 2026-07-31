@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './GroupDetailScreen.css';
+import CreateAnnouncementModal from '../components/groups/CreateAnnouncementModal';
+import AddNoteModal from '../components/groups/AddNoteModal';
 
 const GroupDetailScreen = () => {
   const [activeTab, setActiveTab] = useState('Anuncios');
@@ -353,3 +355,4 @@ const GroupDetailScreen = () => {
 };
 
 export default GroupDetailScreen;
+
