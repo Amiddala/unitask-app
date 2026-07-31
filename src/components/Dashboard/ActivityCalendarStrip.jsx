@@ -1,8 +1,8 @@
 import './ActivityCalendarStrip.css';
 
 const DOT_COLOR = {
-  examen: 'var(--color-exam)',
-  personal: 'var(--color-personal)',
+  examen: 'var(--color-personal)',
+  personal: 'var(--color-exam)',
   grupal: 'var(--color-group)',
 };
 

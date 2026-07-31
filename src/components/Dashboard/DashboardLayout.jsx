@@ -10,11 +10,6 @@ function DashboardLayout({ children, hideBottomNav = false, showBack = false, ba
 
   const initials = user?.avatarIniciales || '??';
   const firstName = user?.nombreCompleto?.split(' ')[0] || 'Estudiante';
-  const today = new Date().toLocaleDateString('es-ES', {
-    weekday: 'long',
-    day: 'numeric',
-    month: 'long',
-  });
 
   const handleBack = () => {
     if (typeof backAction === 'function') {
@@ -46,10 +41,9 @@ function DashboardLayout({ children, hideBottomNav = false, showBack = false, ba
         ) : (
           <>
             <div>
-              <p className="dashboard-layout__greeting">Hola, {firstName}</p>
-              <p className="dashboard-layout__date">{today}</p>
+              <p className="dashboard-layout__greeting">Inicio</p>
             </div>
-              <ProfileAvatarButton
+            <ProfileAvatarButton
               initials={initials}
               avatarUrl={user?.avatarUrl}
               onClick={() => navigate('/perfil')}
