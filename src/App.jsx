@@ -1,4 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
+import AddActivityScreen from './pages/AddActivityScreen/AddActivityScreen';
 import WelcomeScreen from './components/WelcomeScreen/WelcomeScreen';
 import RegisterForm from './components/RegisterForm/RegisterForm';
 import LoginForm from './components/LoginForm/LoginForm';
@@ -15,16 +16,27 @@ import HelpScreen from './pages/HelpScreen/HelpScreen';
 import NotImplementedScreen from './pages/NotImplementedScreen/NotImplementedScreen';
 import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute';
 import './App.css';
-import AddActivityScreen from './pages/AddActivityScreen';
+
 
 function App() {
   return (
     <Routes>
+      
+      <Route
+  path="/actividades/nueva"
+  element={
+    <ProtectedRoute>
+      <AddActivityScreen />
+    </ProtectedRoute>
+  }
+/>
       <Route path="/" element={<WelcomeScreen />} />
       <Route path="/registro" element={<RegisterForm />} />
       <Route path="/login" element={<LoginForm />} />
       <Route path="/actividades/nueva" element={<AddActivityScreen />} />
       
+    
+    
       <Route
         path="/dashboard"
         element={
@@ -69,6 +81,7 @@ function App() {
           </ProtectedRoute>
         }
       />
+      
 
       <Route
         path="/tareas/:id"
