@@ -1,0 +1,173 @@
+/* Variables base ajustadas al diseño */
+:root {
+  --text-primary: #111827;
+  --text-secondary: #4B5563;
+  --bg-page: #F9FAFB; /* Fondo ligerisimo gris */
+  --bg-input: #FFFFFF; /* Inputs blancos */
+  --bg-toggle: #F3F4F6;
+  --border-color: #D1D5DB;
+  --brand-color: #0052CC; /* Azul del boton guardar */
+}
+
+.page-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-height: 100vh;
+  background-color: var(--bg-page);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  background-color: var(--bg-input);
+  position: relative; 
+}
+
+.header-title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.btn-back {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+}
+
+.btn-save {
+  background: none;
+  border: none;
+  color: var(--brand-color);
+  padding: 4px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.form-content {
+  padding: 24px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.form-group input[type="text"],
+.form-group textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  font-size: 15px;
+  color: var(--text-primary);
+  box-sizing: border-box;
+  outline: none;
+  font-family: inherit;
+}
+
+.form-group input[type="text"]::placeholder,
+.form-group textarea::placeholder {
+  color: #9CA3AF;
+}
+
+.form-group input[type="text"]:focus,
+.form-group textarea:focus {
+  border-color: var(--brand-color);
+}
+
+.form-group textarea {
+  height: 120px;
+  resize: none;
+}
+
+/* Estilos del Toggle (Tarea / Examen) */
+.toggle-group {
+  display: flex;
+  background-color: var(--bg-toggle);
+  border-radius: 10px;
+  padding: 4px;
+}
+
+.toggle-btn {
+  flex: 1;
+  padding: 10px;
+  background: none;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 400;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.toggle-btn.active {
+  background-color: var(--bg-input);
+  color: var(--text-primary);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  font-weight: 500;
+}
+
+.form-row {
+  display: flex;
+  gap: 16px;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+/* Estilos para los iconos dentro de los inputs */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 12px;
+  pointer-events: none;
+}
+
+.input-wrapper input {
+  padding-left: 40px !important; /* Espacio para el icono izquierdo */
+}
+
+/* El input de categoría tiene el icono a la derecha */
+.input-wrapper input:not(:placeholder-shown) + .icon-right,
+.icon-right {
+  position: absolute;
+  right: 12px;
+  pointer-events: none;
+}
+
+.input-wrapper:last-child input {
+  padding-left: 14px !important; /* Reseteamos padding porque aqui el icono va a la derecha */
+  padding-right: 40px !important;
+}
