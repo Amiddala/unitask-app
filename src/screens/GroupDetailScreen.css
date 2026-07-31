@@ -2,8 +2,10 @@
 .group-screen {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  min-height: 100vh;
   background-color: var(--color-bg);
+  padding-bottom: 75px;
+  position: relative;
 }
 
 .group-header {
@@ -72,7 +74,8 @@
   padding: 16px;
 }
 
-.join-meeting-btn {
+.join-meeting-btn,
+.add-note-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,15 +90,24 @@
   border-radius: var(--radius-md);
   text-decoration: none;
   box-shadow: var(--shadow-soft);
+  cursor: pointer;
 }
 
-.announcement-card {
+.announcement-card,
+.note-card {
   padding: 16px;
   margin-bottom: 16px;
   background-color: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-soft);
+  display: flex;
+  align-items: center;
+}
+
+.announcement-card {
+  flex-direction: column;
+  align-items: stretch;
 }
 
 .announcement-header {
@@ -115,6 +127,7 @@
   color: var(--color-surface);
   font-weight: 600;
   font-size: 0.875rem;
+  flex-shrink: 0;
 }
 
 .announcement-meta {
@@ -153,10 +166,90 @@
   font-weight: 600;
   border-radius: var(--radius-md);
   cursor: pointer;
+  width: fit-content;
 }
 
 .invite-code-label {
   margin-right: 8px;
   font-weight: 500;
   color: var(--color-ink-muted);
+}
+
+.note-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 14px;
+  flex-shrink: 0;
+}
+
+.note-icon.yellow-bg { background-color: #FEF3C7; }
+.note-icon.blue-bg { background-color: #DBEAFE; }
+
+.note-info {
+  flex: 1;
+}
+
+.note-info h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-ink);
+  margin: 0 0 3px 0;
+}
+
+.note-info p {
+  font-size: 12px;
+  color: var(--color-ink-muted);
+  margin: 0;
+}
+
+.admin-badge {
+  background-color: #EFF6FF;
+  color: #2563EB;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 14px;
+}
+
+/* Barra de navegación inferior fija alineada al contenedor móvil */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 412px;
+  height: 60px;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+.nav-item {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  height: 100%;
+  gap: 3px;
+  color: var(--color-ink-muted);
+  font-size: 11px;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.nav-item.active {
+  color: var(--color-primary);
+  font-weight: 600;
 }
